@@ -1,0 +1,14 @@
+.header {
+  h1 {
+    font-weight:bold;
+    display: inline;
+  }
+  h1::after {
+    content: " ";
+  }
+
+  p {
+    font-size: 0.8em;
+    display: inline;
+  }
+}
