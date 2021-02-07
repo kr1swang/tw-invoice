@@ -6,6 +6,8 @@ import Invoice from '../../containers/Invoice'
 import Footer from '../../components/Footer'
 import './style.scss'
 
+import receipt from '../../assets/receipt.json'
+
 export default function App() {
   const [receipt, useReceipt] = useState([])
   const title = 'tw-invoice'
@@ -17,10 +19,10 @@ export default function App() {
     getReceipt({}).then((resp) => {
       const result = resp.data
       useReceipt(result)
-      console.log(result)
+      console.log('Success! ' + resp)
     }).catch((err) => {
+      useReceipt(receipt)
       console.log('Fail! ' + err)
-      alert('載入失敗😥\n請嘗試重新整理！')
     })
   }, [])
 
