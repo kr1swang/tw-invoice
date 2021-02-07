@@ -12,7 +12,7 @@ export default function App() {
   const title = 'tw-invoice'
   const description = 'Easily Check Taiwan Invoice Lottery Tool.'
   const copyright = `Copyright © ${new Date().getFullYear()} by Kr1sWang.`
-  const githubUrl = 'https://github.com/kr1swang/ac-guide'
+  const githubUrl = 'https://github.com/kr1swang/tw-invoice'
 
   useEffect(() => {
     getReceipt({}).then((resp) => {
