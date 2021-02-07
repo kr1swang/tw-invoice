@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Divider } from 'antd'
-import { getReceipt } from '../../services/getReceipt'
 import Header from '../../components/Header'
 import Invoice from '../../containers/Invoice'
 import Footer from '../../components/Footer'
+import { getReceipt } from '../../services/getReceipt'
+import receiptBackup from '../../assets/receipt.json'
 import './style.scss'
-
-import receipt from '../../assets/receipt.json'
 
 export default function App() {
   const [receipt, useReceipt] = useState([])
@@ -21,7 +20,7 @@ export default function App() {
       useReceipt(result)
       console.log('Success! ' + resp)
     }).catch((err) => {
-      useReceipt(receipt)
+      useReceipt(receiptBackup)
       console.log('Fail! ' + err)
     })
   }, [])
