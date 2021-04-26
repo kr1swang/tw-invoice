@@ -7,14 +7,6 @@ const formItemLayout = {
   wrapperCol: { span: 16 }
 }
 
-InputArea.defaultProps = {
-  options: [],
-  selectValue: {},
-  selectOnChange: () => { },
-  numberValue: '',
-  numberOnChange: () => { }
-}
-
 InputArea.propTypes = {
   options: PropTypes.array,
   selectValue: PropTypes.object,
@@ -23,31 +15,31 @@ InputArea.propTypes = {
   numberOnChange: PropTypes.func
 }
 
-export default function InputArea({ options, selectValue, selectOnChange, numberValue, numberOnChange }) {
+export default function InputArea({
+  options = [],
+  selectValue = {},
+  selectOnChange = () => undefined,
+  numberValue = '',
+  numberOnChange = () => undefined
+}) {
   return (
     <Card className={'inputArea'}>
       <Form>
-        <Form.Item
-          {...formItemLayout}
-          label={'開獎月份'}
-        >
+        <Form.Item {...formItemLayout} label={'開獎月份'}>
           <Select
             disabled={options.length === 0}
             value={selectValue.cTitle}
             onChange={selectOnChange}
             placeholder={'載入中...'}
           >
-            {options.map((item, index) =>
+            {options.map((item, index) => (
               <Select.Option key={index} value={item.cTitle}>
                 {item.cTitle}
               </Select.Option>
-            )}
+            ))}
           </Select>
         </Form.Item>
-        <Form.Item
-          {...formItemLayout}
-          label={'發票末三碼'}
-        >
+        <Form.Item {...formItemLayout} label={'發票末三碼'}>
           <Input
             disabled={options.length === 0}
             value={numberValue}

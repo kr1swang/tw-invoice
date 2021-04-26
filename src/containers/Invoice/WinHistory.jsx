@@ -2,15 +2,11 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Table, Space, Button } from 'antd'
 
-WinHistory.defaultProps = {
-  winState: []
-}
-
 WinHistory.propTypes = {
   winState: PropTypes.array
 }
 
-export default function WinHistory({ winState }) {
+export default function WinHistory({ winState = [] }) {
   const [filter, useFilter] = useState('all')
 
   const dataSource = winState.filter((item) => {
@@ -28,22 +24,26 @@ export default function WinHistory({ winState }) {
       <h3 className={'title'}>
         <Space>
           <span>{'對獎紀錄'}</span>
-          <Button size={'small'} onClick={() => useFilter('all')}>{'全部'}</Button>
-          <Button size={'small'} onClick={() => useFilter('isWin')}>{'中獎'}</Button>
-          <Button size={'small'} onClick={() => useFilter('isLose')}>{'未中'}</Button>
+          <Button size={'small'} onClick={() => useFilter('all')}>
+            {'全部'}
+          </Button>
+          <Button size={'small'} onClick={() => useFilter('isWin')}>
+            {'中獎'}
+          </Button>
+          <Button size={'small'} onClick={() => useFilter('isLose')}>
+            {'未中'}
+          </Button>
         </Space>
       </h3>
-      <Table
-        dataSource={dataSource}
-        rowKey={'index'}
-        scroll={{ y: '40vh' }}
-        pagination={false}
-        size={'small'}
-      >
+      <Table dataSource={dataSource} rowKey={'index'} scroll={{ y: '40vh' }} pagination={false} size={'small'}>
         <Table.Column width={'150px'} dataIndex={'index'} title={'項次'} />
-        <Table.Column title={'號碼'} dataIndex={'number'} render={(text, record) => (
-          <span style={record.isWinng ? { color: 'red', fontWeight: 'bold' } : {}}>{text}</span>
-        )} />
+        <Table.Column
+          title={'號碼'}
+          dataIndex={'number'}
+          render={(text, record) => (
+            <span style={record.isWinng ? { color: 'red', fontWeight: 'bold' } : {}}>{text}</span>
+          )}
+        />
       </Table>
     </Card>
   )

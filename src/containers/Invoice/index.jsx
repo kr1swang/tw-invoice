@@ -8,19 +8,15 @@ import InputArea from './InputArea'
 import WinRate from './WinRate'
 import PrizeDesc from './PrizeDesc'
 import WinHistory from './WinHistory'
-import { prizeList } from '../../assets/enums'
 import { checkWinng } from '../../services/utils'
 import './style.scss'
 
-Invoice.defaultProps = {
-  receipt: []
-}
-
 Invoice.propTypes = {
+  prizeSpce: PropTypes.array,
   receipt: PropTypes.array
 }
 
-export default function Invoice({ receipt }) {
+export default function Invoice({ prizeSpce = [], receipt = [] }) {
   const [options, setOptions, selectValue, selectOnChange] = useSelectMonths()
   const [numberValue, numberOnChange, numberSetValue] = useInputNumber()
   const [winState, addRecord] = useWinState()
@@ -50,22 +46,15 @@ export default function Invoice({ receipt }) {
         </Col>
 
         <Col span={8}>
-          <WinRate
-            winState={winState}
-          />
+          <WinRate winState={winState} />
         </Col>
 
         <Col span={12}>
-          <PrizeDesc
-            prizeList={prizeList}
-            winNumbers={selectValue}
-          />
+          <PrizeDesc prizeList={prizeSpce} winNumbers={selectValue} />
         </Col>
 
         <Col span={12}>
-          <WinHistory
-            winState={winState}
-          />
+          <WinHistory winState={winState} />
         </Col>
       </Row>
     </div>

@@ -3,43 +3,32 @@ import { Card, Divider } from 'antd'
 import Header from '../../components/Header'
 import Invoice from '../../containers/Invoice'
 import Footer from '../../components/Footer'
-import { getReceipt } from '../../services/getReceipt'
-import receiptBackup from '../../assets/receipt.json'
+import { getPrizeSpce, getReceiptByStatic, getReceiptByApi } from '../../services/getReceipt'
 import './style.scss'
 
 export default function App() {
+  const [spec, useSpec] = useState([])
   const [receipt, useReceipt] = useState([])
   const title = 'tw-invoice'
   const description = 'Easily Check Taiwan Invoice Lottery Tool.'
   const copyright = `Copyright © ${new Date().getFullYear()} by Kr1sWang.`
   const githubUrl = 'https://github.com/kr1swang/tw-invoice'
 
-  useEffect(() => {
-    getReceipt({}).then((resp) => {
-      const result = resp.data
-      useReceipt(result)
-      console.log('Success! ' + resp)
-    }).catch((err) => {
-      useReceipt(receiptBackup)
-      console.log('Fail! ' + err)
-    })
+  useEffect(async () => {
+    // always get spec
+    useSpec(await getPrizeSpce())
+    // try get receipt
+    useReceipt(await getReceiptByApi())
+    useReceipt(receipt.length ? receipt : await getReceiptByStatic())
   }, [])
 
   return (
     <Card className={'app'}>
-      <Header
-        title={title}
-        description={description}
-      />
+      <Header title={title} description={description} />
       <Divider />
-      <Invoice
-        receipt={receipt}
-      />
+      <Invoice prizeSpce={spec} receipt={receipt} />
       <Divider />
-      <Footer
-        copyright={copyright}
-        githubUrl={githubUrl}
-      />
+      <Footer copyright={copyright} githubUrl={githubUrl} />
     </Card>
   )
 }

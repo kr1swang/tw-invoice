@@ -4,7 +4,4 @@ import App from './containers/App'
 import 'normalize.css'
 import 'antd/dist/antd.css'
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-)
+ReactDOM.render(<App />, document.getElementById('root'))
