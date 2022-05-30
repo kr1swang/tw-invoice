@@ -1,4 +1,4 @@
-import { apiClient, reqMethods, handlerCorsUrl } from './apiClient'
+import { apiClient, reqMethods } from './apiClient'
 
 export const getPrizeSpce = async (params) =>
   apiClient(reqMethods.GET, '/assets/prizeSpce.json', params)
@@ -24,8 +24,7 @@ export const getReceiptByStatic = async (params) =>
 
 // Seems to be blocked...
 export const getReceiptByApi = async (params) => {
-  const random = Math.floor(Math.random() * 1000) + 1
-  const url = `${handlerCorsUrl(process.env.REACT_APP_BASE_API_URL)}receipt.json?${random}`
+  const url = process.env.REACT_APP_INVOICE_API_URL
   return apiClient(reqMethods.GET, url, params)
     .then((resp) => {
       const result = resp.data
