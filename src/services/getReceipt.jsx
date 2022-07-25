@@ -11,18 +11,6 @@ export const getPrizeSpce = async (params) =>
       return []
     })
 
-export const getReceiptByStatic = async (params) =>
-  apiClient(reqMethods.GET, '/assets/receipt.json', params)
-    .then((resp) => {
-      const result = resp.data
-      return result
-    })
-    .catch((err) => {
-      console.log('Get Receipt By Static Fail! ' + err)
-      return []
-    })
-
-// Seems to be blocked...
 export const getReceiptByApi = async (params) => {
   const url = process.env.REACT_APP_INVOICE_API_URL
   return apiClient(reqMethods.GET, url, params)

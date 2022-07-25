@@ -3,7 +3,7 @@ import { Card, Divider } from 'antd'
 import Header from '../../components/Header'
 import Invoice from '../../containers/Invoice'
 import Footer from '../../components/Footer'
-import { getPrizeSpce, getReceiptByStatic, getReceiptByApi } from '../../services/getReceipt'
+import { getPrizeSpce, getReceiptByApi } from '../../services/getReceipt'
 import './style.scss'
 
 export default function App() {
@@ -19,7 +19,6 @@ export default function App() {
     useSpec(await getPrizeSpce())
     // try get receipt
     useReceipt(await getReceiptByApi())
-    useReceipt(receipt.length ? receipt : await getReceiptByStatic())
   }, [])
 
   return (
