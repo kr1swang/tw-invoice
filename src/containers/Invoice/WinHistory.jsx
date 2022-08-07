@@ -7,7 +7,7 @@ WinHistory.propTypes = {
 }
 
 export default function WinHistory({ winState = [] }) {
-  const [filter, useFilter] = useState('all')
+  const [filter, setFilter] = useState('all')
 
   const dataSource = winState.filter((item) => {
     if ('all'.includes(filter)) {
@@ -24,13 +24,13 @@ export default function WinHistory({ winState = [] }) {
       <h3 className={'title'}>
         <Space>
           <span>{'對獎紀錄'}</span>
-          <Button size={'small'} onClick={() => useFilter('all')}>
+          <Button size={'small'} onClick={() => setFilter('all')}>
             {'全部'}
           </Button>
-          <Button size={'small'} onClick={() => useFilter('isWin')}>
+          <Button size={'small'} onClick={() => setFilter('isWin')}>
             {'中獎'}
           </Button>
-          <Button size={'small'} onClick={() => useFilter('isLose')}>
+          <Button size={'small'} onClick={() => setFilter('isLose')}>
             {'未中'}
           </Button>
         </Space>

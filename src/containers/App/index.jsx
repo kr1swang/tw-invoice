@@ -7,8 +7,8 @@ import { getPrizeSpce, getReceiptByApi } from '../../services/getReceipt'
 import './style.scss'
 
 export default function App() {
-  const [spec, useSpec] = useState([])
-  const [receipt, useReceipt] = useState([])
+  const [spec, setSpec] = useState([])
+  const [receipt, setReceipt] = useState([])
   const title = 'tw-invoice'
   const description = 'Easily Check Taiwan Invoice Lottery Tool.'
   const copyright = `Copyright © ${new Date().getFullYear()} by Kr1sWang.`
@@ -16,9 +16,9 @@ export default function App() {
 
   useEffect(async () => {
     // always get spec
-    useSpec(await getPrizeSpce())
+    setSpec(await getPrizeSpce())
     // try get receipt
-    useReceipt(await getReceiptByApi())
+    setReceipt(await getReceiptByApi())
   }, [])
 
   return (
