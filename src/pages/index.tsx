@@ -17,16 +17,14 @@ import WinningResult from '@/components/WinningResult'
 export default function Home() {
   const router = useRouter()
   const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const period = searchParams.get('period')
   const { data: options = [], error: optionsError } = useSWR(['getPeriodList', {}], getPeriodList)
+  const period = useSearchParams().get('period') ?? options[0]
   const { data: selectedInfo, error: infoError } = useSWR(period ? ['getReceipt', { period }] : null, getReceipt)
   const [history, setHistory] = useState<History[]>([])
 
   useEffect(() => {
-    const isEmpty = !period && options.length > 0
     const isInvalid = period && options.length > 0 && !options.includes(period)
-    if (isEmpty || isInvalid) router.push(`${pathname}?period=${options[0]}`)
+    if (isInvalid) router.push(pathname)
   }, [period, options, router, pathname])
 
   useEffect(() => {

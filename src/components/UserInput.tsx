@@ -16,8 +16,7 @@ export default function UserInput({ options, info, addResult }: UserInputProps) 
   const { t } = useTranslation()
   const router = useRouter()
   const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const period = searchParams.get('period') ?? undefined
+  const period = useSearchParams().get('period') ?? options[0]
   const [input, setInput] = useState<string>('')
 
   const checkWinning = useCallback(
