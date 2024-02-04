@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--noto-sans-tc)', 'var(--work-sans)', fontFamily.sans]
+        sans: ['Consolas', 'var(--noto-sans-tc)', 'var(--work-sans)', fontFamily.sans]
       }
     }
   },

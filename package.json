@@ -8,6 +8,8 @@
     "start": "yarn run build && npx serve out"
   },
   "dependencies": {
+    "@radix-ui/react-select": "^2.0.0",
+    "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-toast": "^1.1.5",
     "axios": "^1.6.6",
     "class-variance-authority": "^0.7.0",
