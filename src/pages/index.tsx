@@ -35,8 +35,8 @@ export default function Home() {
   }, [optionsError, infoError])
 
   return (
-    <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={'p-4 md:grid md:py-8'}>
-      <Card className={'mx-auto flex size-full max-w-screen-2xl flex-col items-stretch gap-6 p-6'}>
+    <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={'sm:p-4 md:grid md:py-8'}>
+      <Card className={'mx-auto flex size-full max-w-screen-2xl flex-col items-stretch gap-6 p-4 sm:p-6'}>
         <Header />
         <Separator />
         <article className={'grid shrink grow grid-cols-1 gap-4 md:grid-cols-6 md:grid-rows-[146px_512px]'}>
