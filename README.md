@@ -2,6 +2,10 @@
 
 Easily Check Taiwan Invoice Lottery Tool.
 
-### todo
+## TODO
 
-- [ ] add rwd to support mobile device
+- [ ] Add share button
+- [ ] Add Skeleton
+- [ ] Add changelog page
+- [ ] Update i18n locales
+- [ ] Update toast
