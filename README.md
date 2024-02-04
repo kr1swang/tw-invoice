@@ -12,3 +12,4 @@ Easily Check Taiwan Invoice Lottery Tool.
 - [ ] Check user input only number
 - [ ] Add Title onClick event
 - [ ] Add Google Analytics
+- [ ] Add transition animation
