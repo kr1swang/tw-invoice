@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import type { ToastActionElement, ToastProps } from '@/components/base'
+import { type ToastActionElement, type ToastProps } from '@/components/base'
 
 const LIMIT = 1
 const REMOVE_DELAY = 3000

@@ -8,3 +8,4 @@ Easily Check Taiwan Invoice Lottery Tool.
 - [ ] Add Skeleton
 - [ ] Add changelog page
 - [ ] Update i18n locales
+- [ ] Update toast

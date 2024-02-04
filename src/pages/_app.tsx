@@ -1,7 +1,7 @@
 import '@/utils/i18n'
 import '@/constants/globals.css'
 
-import type { AppProps } from 'next/app'
+import { type AppProps } from 'next/app'
 import Head from 'next/head'
 import { NotoSansTC, WorkSans } from '@/constants/fonts'
 

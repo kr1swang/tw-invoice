@@ -14,7 +14,7 @@ const ToastViewport = forwardRef<
   <ToastPrimitives.Viewport
     ref={ref}
     className={cn(
-      'fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:top-auto sm:flex-col md:max-w-xs',
+      'fixed right-0 top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:flex-col md:max-w-xs',
       className
     )}
     {...props}
@@ -28,8 +28,9 @@ const toastVariants = cva(
     variants: {
       variant: {
         default: 'bg-background text-white',
-        success: 'bg-primary text-white',
-        error: 'bg-red-500 text-white'
+        success: 'bg-green-600 text-white',
+        error: 'bg-red-600 text-white',
+        warring: 'bg-yellow-600 text-white'
       }
     },
     defaultVariants: {

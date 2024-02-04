@@ -1,5 +1,5 @@
 import axiosApi from '@/api/axiosApi'
-import type { Receipt } from '@/types/common'
+import { type Receipt } from '@/types/common'
 
 export const getPeriodList = async ([_, data]: [string, Record<string, any>]): Promise<string[]> => {
   const params = {}
@@ -19,7 +19,7 @@ export const getReceipt = async ([_, data]: [string, Record<string, any>]): Prom
   if (!resp.data) throw new Error('No data')
   if (!Array.isArray(resp.data)) throw new Error('Data is not an array')
   const item = resp.data.find(({ cTitle }) => cTitle === data.period)
-  if (!item) throw new Error('Data is not found')
+  if (!item) throw new Error('Period not found')
 
   return {
     period: item.cTitle,
