@@ -49,17 +49,18 @@ export default function WinningResult({ history, onRemove, onRemoveAll }: Winnin
 
   return (
     <section className={'flex flex-col gap-6 rounded-sm border p-6 text-sm md:col-span-3'}>
-      <div className={'flex items-center gap-2'}>
+      <div className={'flex flex-wrap items-center gap-2'}>
         <span>{'對獎紀錄'}</span>
-        <ToggleGroup type={'single'} value={filter} onValueChange={(value: Filter) => setFilter(value)} size={'sm'}>
-          <ToggleGroupItem value={'all'}>{'全部'}</ToggleGroupItem>
-          <ToggleGroupItem value={'win'}>{'中獎'}</ToggleGroupItem>
-          <ToggleGroupItem value={'lose'}>{'未中'}</ToggleGroupItem>
-        </ToggleGroup>
-        <div className={'flex-1'} />
-        <Button variant={'ghost'} size={'sm'} onClick={handleRemoveAll}>
-          {'清空紀錄'}
-        </Button>
+        <div className={'flex grow items-center justify-between gap-2'}>
+          <ToggleGroup type={'single'} value={filter} onValueChange={(value: Filter) => setFilter(value)} size={'sm'}>
+            <ToggleGroupItem value={'all'}>{'全部'}</ToggleGroupItem>
+            <ToggleGroupItem value={'win'}>{'中獎'}</ToggleGroupItem>
+            <ToggleGroupItem value={'lose'}>{'未中'}</ToggleGroupItem>
+          </ToggleGroup>
+          <Button variant={'ghost'} size={'sm'} onClick={handleRemoveAll}>
+            {'清空紀錄'}
+          </Button>
+        </div>
       </div>
 
       <Table>

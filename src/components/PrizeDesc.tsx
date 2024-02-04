@@ -38,7 +38,7 @@ export default function PrizeDesc({ info }: PrizeDescProps) {
 
   return (
     <section className={'flex flex-col gap-6 rounded-sm border p-6 text-sm md:col-span-3'}>
-      <div className={'flex items-center gap-2'}>
+      <div className={'flex flex-wrap items-center gap-2'}>
         <span>{info?.period ?? '中獎號碼'}</span>
         <Link
           className={'text-gray-400 underline-offset-2 hover:underline'}
