@@ -18,6 +18,7 @@ module.exports = () => {
   const gitInfo = getGitInfo()
 
   return {
+    productionBrowserSourceMaps: true,
     output: 'export',
     reactStrictMode: true,
     trailingSlash: true,
