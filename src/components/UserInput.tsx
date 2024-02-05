@@ -74,8 +74,8 @@ export default function UserInput({ options, info, addResult }: UserInputProps) 
           onValueChange={(value) => router.push(`${pathname}?period=${value}`)}
           disabled={options.length === 0}
         >
-          <SelectTrigger>
-            <SelectValue id={'period'} placeholder={'Loading...'} />
+          <SelectTrigger id={'period'}>
+            <SelectValue placeholder={'Loading...'} />
           </SelectTrigger>
           <SelectContent>
             {options.map((item, index) => (
