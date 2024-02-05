@@ -18,7 +18,6 @@ module.exports = () => {
   const gitInfo = getGitInfo()
 
   return {
-    // basePath: '/tw-invoice',
     output: 'export',
     reactStrictMode: true,
     trailingSlash: true,
