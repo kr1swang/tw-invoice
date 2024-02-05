@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { motion } from 'framer-motion'
 import useSWR from 'swr'
 
 import { getPeriodList, getReceipt } from '@/api/receiptService'
@@ -33,7 +32,7 @@ export default function Home() {
   }, [optionsError, infoError])
 
   return (
-    <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={'sm:p-4 md:grid md:py-8'}>
+    <main className={'sm:p-4 md:grid md:py-8'}>
       <Card className={'mx-auto flex size-full max-w-screen-2xl flex-col items-stretch gap-6 p-4 sm:p-6'}>
         <Header />
         <Separator />
@@ -54,6 +53,6 @@ export default function Home() {
         <Separator />
         <Footer />
       </Card>
-    </motion.main>
+    </main>
   )
 }
