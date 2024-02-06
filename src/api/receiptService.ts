@@ -8,6 +8,7 @@ export const getPeriodList = async ([_, data]: [string, Record<string, any>]): P
   if (!resp.data) throw new Error('No data')
   if (!Array.isArray(resp.data)) throw new Error('Data is not an array')
 
+  return []
   return resp.data.map((item: any) => item.cTitle)
 }
 

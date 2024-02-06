@@ -18,19 +18,11 @@ module.exports = () => {
   const gitInfo = getGitInfo()
 
   return {
-    productionBrowserSourceMaps: true,
     output: 'export',
     reactStrictMode: true,
     trailingSlash: true,
-    eslint: {
-      ignoreDuringBuilds: true
-    },
-    images: {
-      unoptimized: true
-    },
-    env: {
-      version,
-      ...gitInfo
-    }
+    eslint: { ignoreDuringBuilds: true },
+    images: { unoptimized: true },
+    env: { version, ...gitInfo }
   }
 }
