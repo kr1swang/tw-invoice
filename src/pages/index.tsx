@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Dot } from 'lucide-react'
 import useSWR from 'swr'
 
 import { getPeriodList, getReceipt } from '@/api/receiptService'
@@ -16,7 +17,7 @@ import WinningResult from '@/components/WinningResult'
 export default function Home() {
   const router = useRouter()
   const pathname = usePathname()
-  const { data: options = [], error: optionsError } = useSWR(['getPeriodList', {}], getPeriodList)
+  const { data: options = [], error: optionsError, isLoading } = useSWR(['getPeriodList', {}], getPeriodList)
   const period = useSearchParams().get('period') ?? options[0]
   const { data: selectedInfo, error: infoError } = useSWR(period ? ['getReceipt', { period }] : null, getReceipt)
   const [history, setHistory] = useState<History[]>([])
@@ -31,12 +32,18 @@ export default function Home() {
     if (errorMassage) toast({ variant: 'error', description: errorMassage })
   }, [optionsError, infoError])
 
-  return (
-    <main className={'sm:p-4 md:grid md:py-8'}>
+  return !isLoading ? (
+    <div className={'flex h-screen items-center justify-center'}>
+      <Dot className={'animate-ping delay-0'} />
+      <Dot className={'animate-ping delay-150'} />
+      <Dot className={'animate-ping delay-300'} />
+    </div>
+  ) : (
+    <div className={'sm:p-4 md:py-8'}>
       <Card className={'mx-auto flex size-full max-w-screen-2xl flex-col items-stretch gap-6 p-4 sm:p-6'}>
         <Header />
         <Separator />
-        <article className={'grid shrink grow grid-cols-1 gap-4 md:grid-cols-6 md:grid-rows-[146px_min(50vh,512px)]'}>
+        <main className={'grid shrink grow grid-cols-1 gap-4 md:grid-cols-6 md:grid-rows-[146px_min(50vh,512px)]'}>
           <UserInput
             options={options}
             info={selectedInfo}
@@ -49,10 +56,10 @@ export default function Home() {
             onRemove={(id) => setHistory((prev) => prev.filter((item) => item.id !== id))}
             onRemoveAll={() => setHistory([])}
           />
-        </article>
+        </main>
         <Separator />
         <Footer />
       </Card>
-    </main>
+    </div>
   )
 }
