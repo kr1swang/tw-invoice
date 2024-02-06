@@ -34,7 +34,7 @@ export default function Home() {
     if (errorMassage) toast({ variant: 'error', description: errorMassage })
   }, [optionsError, infoError])
 
-  return !isLoading ? (
+  return isLoading ? (
     <div className={'flex h-screen items-center justify-center'}>
       <Dot className={'animate-ping delay-0'} />
       <Dot className={'animate-ping delay-150'} />
