@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { motion } from 'framer-motion'
 import { Dot } from 'lucide-react'
 import useSWR from 'swr'
 
@@ -41,7 +42,7 @@ export default function Home() {
       <Dot className={'animate-ping delay-300'} />
     </div>
   ) : (
-    <div className={'sm:p-4 md:py-8'}>
+    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={'sm:p-4 md:py-8'}>
       <Card className={'mx-auto flex size-full max-w-screen-2xl flex-col items-stretch gap-6 p-4 sm:p-6'}>
         <Header />
         <Separator />
@@ -62,6 +63,6 @@ export default function Home() {
         <Separator />
         <Footer />
       </Card>
-    </div>
+    </motion.div>
   )
 }

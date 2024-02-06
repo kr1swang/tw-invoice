@@ -1,11 +1,11 @@
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import Link from 'next/link'
 import { prizeList } from '@/constants/prizeList'
 import { HelpCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { type Receipt } from '@/types/common'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/base'
+import { Skeleton, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/base'
 
 interface PrizeDescProps {
   info: Receipt | undefined
@@ -15,37 +15,40 @@ export default function PrizeDesc({ info }: PrizeDescProps) {
   const { t } = useTranslation()
   const sourceUrl = process.env.NEXT_PUBLIC_ETAX_URL
   const list = useMemo(() => {
-    try {
-      if (!info) throw new Error('info is undefined')
-      return (
-        prizeList
-          // format the number
-          .map((item) => {
-            const key = item.mappingKey as keyof Receipt
-            const value = info[key] ?? ''
-            return { ...item, number: Array.isArray(value) ? value.join(', ') : value }
-          })
-          // filter out additionalSixth if it's empty
-          .filter((item) => {
-            const isAdditionalSixth = item.mappingKey === 'additionalSixth'
-            return !isAdditionalSixth || (isAdditionalSixth && item.number !== '')
-          })
-      )
-    } catch (e) {
-      return []
-    }
+    return (
+      prizeList
+        // format the number
+        .map((item) => {
+          const key = item.mappingKey as keyof Receipt
+          const value = info?.[key] ?? ''
+          return { ...item, number: Array.isArray(value) ? value.join(', ') : value }
+        })
+        // filter out additionalSixth if it's empty
+        .filter((item) => {
+          const isAdditionalSixth = item.mappingKey === 'additionalSixth'
+          return !isAdditionalSixth || (isAdditionalSixth && item.number !== '')
+        })
+    )
   }, [info])
+
+  const handleSkeletonStyle = useCallback((key: keyof Receipt) => {
+    switch (key) {
+      case 'special':
+      case 'grand':
+        return 'h-5 w-20'
+      case 'first':
+        return 'h-5 w-64'
+      default:
+        return 'hidden'
+    }
+  }, [])
 
   return (
     <section className={'flex flex-col gap-6 rounded-sm border p-6 text-sm md:col-span-3'}>
-      <div className={'flex flex-wrap items-center gap-2'}>
-        <span>{info?.period ?? '中獎號碼'}</span>
-        <Link
-          className={'text-gray-400 underline-offset-2 hover:underline'}
-          href={sourceUrl!}
-          target={'_blank'}
-          rel={'noreferrer'}
-        >
+      <div className={'flex flex-wrap items-center justify-between gap-2'}>
+        {info ? <span>{info.period}</span> : <Skeleton className={'h-5 w-64'} />}
+
+        <Link className={'underline-offset-2 hover:underline'} href={sourceUrl!} target={'_blank'} rel={'noreferrer'}>
           {'資料來源(財政部)'}
         </Link>
       </div>
@@ -57,37 +60,25 @@ export default function PrizeDesc({ info }: PrizeDescProps) {
             <TableHead>{'中獎號碼'}</TableHead>
           </TableRow>
         </TableHeader>
-        {list.length === 0 ? (
-          <EmptyTableBody colSpan={2} />
-        ) : (
-          <TableBody>
-            {list.map((item, index) => (
+        <TableBody>
+          {list.map((item, index) => {
+            const className = handleSkeletonStyle(item.mappingKey as keyof Receipt)
+            return (
               <TableRow key={index}>
                 <TableCell className={'font-medium'}>{item.name}</TableCell>
                 <TableCell className={'flex flex-col gap-1'}>
-                  <code className={'text-red-600'}>{item.number}</code>
+                  {item.number ? (
+                    <code className={'text-red-600'}>{item.number}</code>
+                  ) : (
+                    <Skeleton className={className} />
+                  )}
                   <span className={'text-xs'}>{item.rule}</span>
                 </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        )}
+            )
+          })}
+        </TableBody>
       </Table>
     </section>
-  )
-}
-
-function EmptyTableBody({ colSpan }: { colSpan: number }) {
-  return (
-    <TableBody>
-      <TableRow>
-        <TableCell colSpan={colSpan}>
-          <div className={'flex h-80 flex-col items-center justify-center gap-2'}>
-            <HelpCircle className={'size-6 text-gray-400'} />
-            <span className={'text-gray-400'}>{'No Data'}</span>
-          </div>
-        </TableCell>
-      </TableRow>
-    </TableBody>
   )
 }
