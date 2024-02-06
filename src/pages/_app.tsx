@@ -12,6 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>{'tw-invoice'}</title>
+        <meta name={'description'} content={'Easily Check Taiwan Invoice Lottery Tool.'} />
         <meta name={'viewport'} content={'width=device-width, initial-scale=1'} />
 
         <style
