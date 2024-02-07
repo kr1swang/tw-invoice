@@ -29,7 +29,7 @@ export default function WinningRate({ history }: WinningRateProps) {
   }, [counter, rate])
 
   return (
-    <section className={'grid place-items-center gap-2 rounded-sm border p-6 md:col-span-2'}>
+    <section className={'grid place-items-center gap-2 rounded-sm border p-4 sm:p-6 md:col-span-2'}>
       <div className={'flex flex-row items-baseline gap-1'}>
         <span className={'text-sm text-gray-600'}>{'中獎機率'}</span>
         <code className={'text-sm text-gray-600'}>{titleDesc}</code>

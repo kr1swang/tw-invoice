@@ -65,7 +65,7 @@ export default function UserInput({ options, info, addResult }: UserInputProps) 
   )
 
   return (
-    <section className={'flex flex-col gap-6 rounded-sm border p-6 text-sm md:col-span-4'}>
+    <section className={'flex flex-col gap-6 rounded-sm border p-4 text-sm sm:p-6 md:col-span-4'}>
       <div className={'flex flex-col gap-2 md:flex-row md:items-center'}>
         <label
           htmlFor={'period'}
