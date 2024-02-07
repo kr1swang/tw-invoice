@@ -10,7 +10,7 @@ export type Prize = {
   prize: string
   name: string
   rule: string
-  mappingKey: string
+  mappingKey: string | undefined
 }
 
 export type History = {
